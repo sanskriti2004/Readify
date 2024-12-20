@@ -3,104 +3,40 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>liBROry</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="./src/book.png" />
+    <title>Readify</title>
   </head>
   <body>
-    <div class="hero">
-      <h1 class="logo">liBROry</h1>
-      <input
-        class="book-details-input"
-        type="text"
-        placeholder="Tile of the Book"
-      />
-      <input class="book-details-input" type="text" placeholder="Author" />
-      <input class="book-details-input" type="number" placeholder="Pages" />
-      <span class="radio-input"
-        ><input type="radio" /> has it been read yet?</span
-      >
-
-      <button class="add-book-btn">Add Book</button>
-    </div>
     <div class="card-container">
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
+      <div class="content">
+        <div class="card">
+          <button id="add-btn">
+            <img id="add-img" src="./src/plus.png" alt="add-btn" />
+          </button>
+        </div>
       </div>
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
-      </div>
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
-      </div>
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
-      </div>
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
-      </div>
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
-      </div>
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
-      </div>
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
-      </div>
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
-      </div>
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
-      </div>
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
-      </div>
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
-      </div>
-      <div class="card">
-        <h1>title</h1>
-        <h3>author</h3>
-        <p>pages</p>
-        <span><button>Remove</button> <button>Read</button></span>
+
+      <div class="status-bar">
+        <span class="status-child"
+          ><img src="./src/book.png" alt="book" id="book" /><span
+            id="total-books"
+            >0</span
+          ></span
+        >
+        <span class="status-child"
+          ><img src="./src/pages.png" alt="pages-read" id="pages-read" /><span
+            id="total-pages"
+            >0</span
+          ></span
+        >
+        <span class="status-child"
+          ><img src="./src/tick2.png" alt="status" id="status" />
+          <span id="total-books-read"></span>0</span
+        >
       </div>
     </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
