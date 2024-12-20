@@ -22,7 +22,9 @@
           </button>
         </div>
         <div class="card">
-          <p>test</p>
+          <p id="card-book-title">Book Title</p>
+          <p id="card-author-name">Book Title</p>
+          <p id="card-pages">Book Title</p>
         </div>
       </div>
 
@@ -46,21 +48,36 @@
       </div>
     </div>
     <div class="book-info">
-      <form action="submit">
+      <div class="form">
         <span class="title"
           ><span>Add a Book </span
           ><button id="form-close-btn">
             <img id="form-close" src="./src/cross.png" alt="cancel" /></button
         ></span>
-        <input type="text" id="book-name" placeholder="Book Tile" />
-        <input type="text" id="author-name" placeholder="Author" />
-        <input type="number" id="pages" placeholder="Pages" />
+        <input
+          type="text"
+          id="book-name"
+          placeholder="Book Tile"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          id="author-name"
+          placeholder="Author"
+          autocomplete="off"
+        />
+        <input
+          type="number"
+          id="pages"
+          placeholder="Pages"
+          autocomplete="off"
+        />
         <span class="status-container">
           <input type="radio" id="read-status" name="toggle" value="read" />
           <label for="read-status">All Pages Read!</label>
         </span>
         <button type="submit" id="add-book-btn">Add Book</button>
-      </form>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>

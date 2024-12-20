@@ -28,6 +28,12 @@ body {
   justify-content: space-between;
 }
 
+.content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+}
+
 .status-bar {
   width: 25vw;
   height: 8vh;
@@ -56,14 +62,14 @@ img {
 }
 
 .card {
-  margin: 5px;
+  margin: 20px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   background-color: white;
-  max-width: 15vw;
+  width: 15vw;
   height: 30vh;
   box-shadow: 3px 3px 1px 1px #f39dab98;
 }
@@ -103,7 +109,7 @@ img {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-form {
+.form {
   display: flex;
   flex-direction: column;
   gap: 20px;
@@ -117,6 +123,10 @@ form {
   font-size: 1.2rem;
   font-weight: bold;
   margin-top: -20px;
+}
+#form-close-btn {
+  border: none;
+  background-color: transparent;
 }
 #form-close {
   width: 40px;
@@ -166,4 +176,7 @@ input {
   justify-content: start;
   align-items: center;
   gap: 5px;
+}
+.blurred {
+  filter: blur(5px);
 }
