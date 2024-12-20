@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Lora;
 }
 
 body {
@@ -53,11 +54,7 @@ img {
   border-radius: 10px;
   margin: 3px;
 }
-img:hover {
-  background-color: rgba(156, 156, 156, 0.119);
-  border-radius: 50%;
-  transition: all 0.5s ease-in-out;
-}
+
 .card {
   margin: 5px;
   border-radius: 10px;
@@ -87,4 +84,86 @@ img:hover {
   transition: background-color 0.5s ease-in-out;
   border-radius: 50%;
   cursor: pointer;
+}
+.book-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 3px 3px 1px 1px #f39dab98;
+  width: 30vw;
+  height: 50vh;
+  padding: 20px 0 20px 0;
+  gap: 40px;
+  align-self: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: -20px;
+}
+#form-close {
+  width: 40px;
+  height: 40px;
+  margin-right: -8px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+input {
+  padding: 10px;
+  border-radius: 20px;
+  height: 5vh;
+  width: 27vw;
+  font-size: 1.2rem;
+  border: none;
+  box-shadow: 0px 0px 5px 1px rgb(236, 231, 231);
+}
+#read-status {
+  width: 3vw;
+  height: 3vh;
+  cursor: pointer;
+  border-radius: 50%;
+  border: none;
+  background-color: transparent;
+  box-shadow: 0px 0px 0px 0px rgb(236, 231, 231);
+}
+#add-book-btn {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  border-radius: 20px;
+  text-align: center;
+  width: 27vw;
+  font-size: 1.2rem;
+  border: none;
+  box-shadow: 0px 0px 5px 1px rgb(236, 231, 231);
+  cursor: pointer;
+  background: linear-gradient(to right, #ffc19e, #ffc3cd);
+}
+#add-book-btn:hover {
+  background: linear-gradient(to right, #f69272, #fcba94);
+  transition: all 0.5s ease-in-out;
+}
+.status-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: 5px;
 }

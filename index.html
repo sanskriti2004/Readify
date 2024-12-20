@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
     <link rel="icon" href="./src/book.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+      rel="stylesheet"
+    />
     <title>Readify</title>
   </head>
   <body>
@@ -14,6 +20,9 @@
           <button id="add-btn">
             <img id="add-img" src="./src/plus.png" alt="add-btn" />
           </button>
+        </div>
+        <div class="card">
+          <p>test</p>
         </div>
       </div>
 
@@ -36,7 +45,23 @@
         >
       </div>
     </div>
-
+    <div class="book-info">
+      <form action="submit">
+        <span class="title"
+          ><span>Add a Book </span
+          ><button id="form-close-btn">
+            <img id="form-close" src="./src/cross.png" alt="cancel" /></button
+        ></span>
+        <input type="text" id="book-name" placeholder="Book Tile" />
+        <input type="text" id="author-name" placeholder="Author" />
+        <input type="number" id="pages" placeholder="Pages" />
+        <span class="status-container">
+          <input type="radio" id="read-status" name="toggle" value="read" />
+          <label for="read-status">All Pages Read!</label>
+        </span>
+        <button type="submit" id="add-book-btn">Add Book</button>
+      </form>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
