@@ -226,3 +226,6 @@ input {
 .blurred {
   filter: blur(5px);
 }
+::-webkit-scrollbar {
+  display: none;
+}
