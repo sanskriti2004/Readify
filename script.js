@@ -31,7 +31,26 @@ formSubmitButton.addEventListener("click", () => {
 
 function createBookCard(title, author, pages, read) {
   const card = document.createElement("div");
-  card.classList.add("card");
+  const editToolContainer = document.createElement("div");
+  const content = document.createElement("div");
+  const bookTitle = document.createElement("p");
+  const bookAuthor = document.createElement("p");
+  const bookPages = document.createElement("p");
+  bookTitle.classList.add("card-book-title");
+  bookAuthor.classList.add("card-author");
+  bookPages.classList.add("card-pages");
 
+  bookTitle.textContent = title;
+  bookAuthor.textContent = author;
+  bookPages.textContent = pages;
+
+  card.classList.add("card");
+  editToolContainer.classList.add("edit-tool-container");
+  content.classList.add("card-info");
+  content.appendChild(bookTitle);
+  content.appendChild(bookAuthor);
+  content.appendChild(bookPages);
+  card.appendChild(editToolContainer);
+  card.appendChild(content);
   return card;
 }
