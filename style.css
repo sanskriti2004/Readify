@@ -73,6 +73,7 @@ img {
   margin: 10px;
   border-radius: 10px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
@@ -85,12 +86,10 @@ img {
 .edit-tool-container {
   display: flex;
   flex-direction: row;
-  justify-content: end;
+  justify-content: center;
   align-items: center;
-}
-
-.card:hover .edit-tool-container {
-  opacity: 1; /* Make the container visible on hover */
+  border-bottom: 2px solid #f39dab98;
+  gap: 10px;
 }
 
 #edit-btn,
@@ -99,12 +98,14 @@ img {
   background-color: transparent;
   cursor: pointer;
 }
+
 .card-info {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
+  border-top: 2px solid #f39dab98;
 }
 #add-btn {
   border: none;
