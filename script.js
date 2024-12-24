@@ -3,10 +3,6 @@ const formDiv = document.querySelector(".book-info");
 const addBookButton = document.querySelector("#add-btn");
 const mainContainer = document.querySelector(".content");
 const formSubmitButton = document.querySelector("#add-book-btn");
-const bookTitle = document.querySelector("#book-name").value;
-const bookAuthor = document.querySelector("#author-name").value;
-const bookPages = document.querySelector("#pages").value;
-const bookRead = document.querySelector("#read-status").value;
 
 formCloseButton.addEventListener("click", () => {
   formDiv.style.display = "none";
@@ -18,10 +14,14 @@ addBookButton.addEventListener("click", () => {
 });
 
 formSubmitButton.addEventListener("click", () => {
-  // if (bookTitle === "" || bookAuthor === "" || bookPages === "") {
-  //   alert("Please fill out all the fields");
-  //   return;
-  // }
+  const bookTitle = document.getElementById("book-name").value.trim();
+  const bookAuthor = document.getElementById("author-name").value.trim();
+  const bookPages = document.getElementById("pages").value.trim();
+  const bookRead = document.getElementById("read-status").checked;
+  if (bookTitle === "" || bookAuthor === "" || bookPages === "") {
+    alert("Please fill out all the fields");
+    return;
+  }
   mainContainer.appendChild(
     createBookCard(bookTitle, bookAuthor, bookPages, bookRead)
   );

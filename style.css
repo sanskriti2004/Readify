@@ -80,33 +80,17 @@ img {
   width: 15vw;
   height: 30vh;
   box-shadow: 3px 3px 1px 1px #f39dab98;
-  position: relative; /* Ensure child elements like buttons are positioned relative to the card */
-  overflow: hidden; /* Prevents child elements from spilling outside the card */
 }
 
 .edit-tool-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
-  position: absolute; /* Allows centering over the card */
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0; /* Hidden by default */
-  transition: opacity 0.3s ease; /* Smooth transition for hover effect */
-  z-index: 2; /* Ensure the edit buttons appear on top of the blurred card */
 }
 
 .card:hover .edit-tool-container {
   opacity: 1; /* Make the container visible on hover */
-}
-
-.card-info:hover {
-  backdrop-filter: blur(8px); /* Adds a blur effect to the card content */
-  filter: blur(
-    8px
-  ); /* Fallback for browsers that don't support backdrop-filter */
 }
 
 #edit-btn,
@@ -116,8 +100,11 @@ img {
   cursor: pointer;
 }
 .card-info {
-  width: 100%;
-  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 #add-btn {
   border: none;
