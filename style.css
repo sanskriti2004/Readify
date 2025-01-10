@@ -29,7 +29,7 @@ body {
 }
 
 .content {
-  overflow-y: scroll;
+  overflow-y: auto;
   height: 80vh;
   display: flex;
   flex-wrap: wrap;
@@ -149,7 +149,7 @@ img {
   justify-content: start;
   align-items: start;
   padding: 15px;
-  overflow: scroll;
+  overflow-y: auto;
 }
 .card-book-title {
   font-size: 1.7rem;
@@ -268,6 +268,28 @@ input {
 .blurred {
   filter: blur(5px);
 }
-::-webkit-scrollbar {
-  display: none;
+.content::-webkit-scrollbar-track {
+  background-color: transparent;
+  background-color: #f5f5f500;
+  padding: 50px;
+}
+
+.content::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: #f5f5f500;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 10px;
+  background-color: #ffffffc5;
+}
+.card-info::-webkit-scrollbar {
+  width: 0.5rem;
+  background-color: rgba(170, 170, 170, 0);
+}
+.card-info::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 10px;
+  background-color: #bdbdbd9f;
 }
