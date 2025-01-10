@@ -22,35 +22,87 @@ formSubmitButton.addEventListener("click", () => {
     alert("Please fill out all the fields");
     return;
   }
-  mainContainer.appendChild(
-    createBookCard(bookTitle, bookAuthor, bookPages, bookRead)
-  );
+  const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
+  newBook.addToHtml();
   formDiv.style.display = "none";
   mainContainer.classList.remove("blurred");
 });
 
-function createBookCard(title, author, pages, read) {
-  const card = document.createElement("div");
-  const editToolContainer = document.createElement("div");
-  const content = document.createElement("div");
-  const bookTitle = document.createElement("p");
-  const bookAuthor = document.createElement("p");
-  const bookPages = document.createElement("p");
-  bookTitle.classList.add("card-book-title");
-  bookAuthor.classList.add("card-author");
-  bookPages.classList.add("card-pages");
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 
-  bookTitle.textContent = title;
-  bookAuthor.textContent = author;
-  bookPages.textContent = pages;
+  addToHtml() {
+    // Capitalize the first letter of each word for title and author
+    this.title = this.title
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
 
-  card.classList.add("card");
-  editToolContainer.classList.add("edit-tool-container");
-  content.classList.add("card-info");
-  content.appendChild(bookTitle);
-  content.appendChild(bookAuthor);
-  content.appendChild(bookPages);
-  card.appendChild(editToolContainer);
-  card.appendChild(content);
-  return card;
+    this.author = this.author
+      .toLowerCase()
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(" ");
+
+    // Create card element and append book details
+    const card = document.createElement("div");
+    card.classList.add("card");
+
+    const cardInfo = document.createElement("div");
+    cardInfo.classList.add("card-info");
+
+    const cardBookTitle = document.createElement("span");
+    cardBookTitle.classList.add("card-book-title");
+    cardBookTitle.textContent = this.title;
+
+    const cardAuthor = document.createElement("span");
+    cardAuthor.classList.add("card-author");
+    cardAuthor.textContent = "By " + this.author;
+
+    const cardPages = document.createElement("span");
+    cardPages.classList.add("card-pages");
+    cardPages.textContent = this.pages + " pages";
+
+    cardInfo.append(cardBookTitle, cardAuthor, cardPages);
+
+    // Tool container with edit and delete buttons
+    const toolContainer = document.createElement("div");
+    toolContainer.classList.add("edit-tool-container");
+
+    if (this.read) {
+      const readStatusBtn = document.createElement("button");
+      readStatusBtn.setAttribute("id", "card-read-status"); // Corrected method to set attribute
+      const readStatusImg = document.createElement("img");
+      readStatusImg.src = "./src/tick1.png";
+      readStatusImg.setAttribute("id", "card-read-status-img");
+      readStatusBtn.appendChild(readStatusImg);
+      toolContainer.appendChild(readStatusBtn);
+    }
+
+    const EditBtn = document.createElement("button");
+    EditBtn.setAttribute("id", "edit-btn"); // Corrected method to set attribute
+    const EditImg = document.createElement("img");
+    EditImg.src = "./src/edit.png";
+    EditImg.setAttribute("id", "edit-img");
+    EditBtn.appendChild(EditImg);
+
+    const DelBtn = document.createElement("button");
+    DelBtn.setAttribute("id", "delete-btn"); // Corrected method to set attribute
+    const DelImg = document.createElement("img");
+    DelImg.src = "./src/cross.png"; // Corrected image reference for delete button
+    DelImg.setAttribute("id", "delete-img");
+    DelBtn.appendChild(DelImg);
+
+    toolContainer.append(EditBtn, DelBtn); // Correctly append both buttons
+
+    card.append(cardInfo, toolContainer);
+
+    mainContainer.appendChild(card);
+  }
 }

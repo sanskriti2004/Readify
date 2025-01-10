@@ -7,6 +7,12 @@
     <link rel="icon" href="./src/book.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap"
+      rel="stylesheet"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
       rel="stylesheet"
@@ -16,7 +22,7 @@
   <body>
     <div class="card-container">
       <div class="content">
-        <div class="card">
+        <div id="card">
           <button id="add-btn">
             <img id="add-img" src="./src/plus.png" alt="add-btn" />
           </button>
@@ -28,6 +34,13 @@
             <span class="card-pages">400 pages</span>
           </div>
           <div class="edit-tool-container">
+            <button id="card-read-status">
+              <img
+                id="card-read-status-img"
+                src="./src/tick1.png"
+                alt="read-btn"
+              />
+            </button>
             <button id="edit-btn">
               <img id="edit-img" src="./src/edit.png" alt="edit-btn" />
             </button>
@@ -69,7 +82,7 @@
         <input
           type="text"
           id="book-name"
-          placeholder="Book Tile"
+          placeholder="Book Title"
           autocomplete="off"
         />
         <input
