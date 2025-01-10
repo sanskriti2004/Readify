@@ -3,10 +3,15 @@ const formDiv = document.querySelector(".book-info");
 const addBookButton = document.querySelector("#add-btn");
 const mainContainer = document.querySelector(".content");
 const formSubmitButton = document.querySelector("#add-book-btn");
+const TotalPages = document.querySelector("#total-pages");
+const TotalBooks = document.querySelector("#total-books");
+const TotalBooksRead = document.querySelector("#total-books-read");
+const form = document.querySelector("#book-form");
 
 formCloseButton.addEventListener("click", () => {
   formDiv.style.display = "none";
   mainContainer.classList.remove("blurred");
+  form.reset();
 });
 addBookButton.addEventListener("click", () => {
   formDiv.style.display = "flex";
@@ -26,6 +31,7 @@ formSubmitButton.addEventListener("click", () => {
   newBook.addToHtml();
   formDiv.style.display = "none";
   mainContainer.classList.remove("blurred");
+  form.reset();
 });
 
 class Book {
@@ -83,6 +89,7 @@ class Book {
       readStatusImg.setAttribute("id", "card-read-status-img");
       readStatusBtn.appendChild(readStatusImg);
       toolContainer.appendChild(readStatusBtn);
+      TotalBooksRead.textContent = parseInt(TotalBooksRead.textContent) + 1;
     }
 
     const EditBtn = document.createElement("button");
@@ -102,6 +109,10 @@ class Book {
     toolContainer.append(EditBtn, DelBtn); // Correctly append both buttons
 
     card.append(cardInfo, toolContainer);
+
+    TotalBooks.textContent = parseInt(TotalBooks.textContent) + 1;
+    TotalPages.textContent =
+      parseInt(TotalPages.textContent) + parseInt(this.pages);
 
     mainContainer.appendChild(card);
   }

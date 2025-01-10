@@ -77,7 +77,7 @@ img {
   grid-template-rows: 4fr 1fr;
   background-color: white;
   width: 15vw;
-  height: 25vh;
+  height: 30vh;
   align-items: center;
   justify-content: center;
   box-shadow: 3px 3px 1px 1px #f39dab98;
@@ -89,10 +89,11 @@ img {
   grid-template-rows: 3fr 1fr;
   background-color: white;
   width: 25vw;
-  height: 25vh;
+  height: 30vh;
   box-shadow: 3px 3px 1px 1px #f39dab98;
 }
-#card:hover {
+
+#add-btn:hover {
   background-color: rgb(239, 238, 238);
   transition: background-color 0.5s ease-in-out;
 }
@@ -111,20 +112,31 @@ img {
   height: auto;
   width: 2.3rem;
 }
+#delete-btn {
+  padding: 6px;
+}
 #edit-img {
   height: auto;
   width: 3rem;
+}
+#delete-btn:hover {
+  background-color: rgba(168, 167, 167, 0.208);
+  cursor: pointer;
+}
+#edit-btn:hover {
+  background-color: rgba(168, 167, 167, 0.208);
+  cursor: pointer;
 }
 #edit-btn,
 #delete-btn {
   border: none;
   background-color: transparent;
   cursor: pointer;
+  border-radius: 60%;
 }
 #card-read-status {
   border: none;
   background-color: transparent;
-  margin-right: -9px;
 }
 #card-read-status-img {
   width: 3rem;
@@ -136,12 +148,13 @@ img {
   flex-direction: column;
   justify-content: start;
   align-items: start;
-  gap: 10px;
   padding: 15px;
+  overflow: scroll;
 }
 .card-book-title {
   font-size: 1.7rem;
   font-weight: 800;
+  margin-bottom: 0.5rem;
 }
 .card-author {
   font-size: 1rem;
@@ -150,8 +163,10 @@ img {
   font-size: 0.8rem;
 }
 #add-btn {
-  border: none;
   background-color: transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  border: none;
 }
 #add-img {
   width: 120px;

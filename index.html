@@ -67,42 +67,48 @@
           >
           <span class="status-child"
             ><img src="./src/tick2.png" alt="status" id="status" />
-            <span id="total-books-read"></span>0</span
+            <span id="total-books-read">0</span></span
           >
         </div>
       </div>
     </div>
     <div class="book-info">
-      <div class="form">
-        <span class="title"
-          ><span>Add a Book </span
-          ><button id="form-close-btn">
-            <img id="form-close" src="./src/cross.png" alt="cancel" /></button
-        ></span>
+      <form class="form" id="book-form">
+        <span class="title">
+          <span>Add a Book</span>
+          <button type="button" id="form-close-btn">
+            <img id="form-close" src="./src/cross.png" alt="cancel" />
+          </button>
+        </span>
         <input
           type="text"
           id="book-name"
           placeholder="Book Title"
           autocomplete="off"
+          required
         />
         <input
           type="text"
           id="author-name"
           placeholder="Author"
           autocomplete="off"
+          required
         />
         <input
           type="number"
           id="pages"
           placeholder="Pages"
           autocomplete="off"
+          required
         />
         <span class="status-container">
           <input type="radio" id="read-status" name="toggle" value="read" />
           <label for="read-status">All Pages Read!</label>
         </span>
         <button type="submit" id="add-book-btn">Add Book</button>
-      </div>
+      </form>
+    </div>
+    
     </div>
     <script src="script.js"></script>
   </body>
