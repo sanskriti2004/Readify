@@ -293,3 +293,61 @@ input {
   border-radius: 10px;
   background-color: #bdbdbd9f;
 }
+
+@media (max-width: 475px) {
+  .card-container {
+    height: 95vh;
+    width: 95vw;
+    border-radius: 20px;
+    padding: 15px 15px 0 15px;
+  }
+  .content {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0px;
+  }
+  .footer {
+    height: 10vh;
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .status-bar {
+    width: 100%;
+    margin-right: 10px;
+  }
+  #card {
+    width: 70vw;
+    height: 10vh;
+  }
+  #add-img {
+    width: 80px;
+    height: 80px;
+    padding-top: 5px;
+  }
+  .book-info {
+    width: 70vw;
+    height: 40vh;
+  }
+  .edit-tool-container {
+    height: 5vh;
+  }
+
+  .card {
+    width: 70vw;
+    height: 20vh;
+  }
+}
+@media (min-width: 640px) {
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 1024px) {
+}
+@media (min-width: 1280px) {
+}
+@media (min-width: 1536px) {
+}

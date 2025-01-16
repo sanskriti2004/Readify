@@ -32,6 +32,9 @@ formSubmitButton.addEventListener("click", () => {
   formDiv.style.display = "none";
   mainContainer.classList.remove("blurred");
   form.reset();
+
+  // Save the book to localStorage
+  saveBookToLocalStorage(newBook);
 });
 
 class Book {
@@ -83,7 +86,7 @@ class Book {
 
     if (this.read) {
       const readStatusBtn = document.createElement("button");
-      readStatusBtn.setAttribute("id", "card-read-status"); // Corrected method to set attribute
+      readStatusBtn.setAttribute("id", "card-read-status");
       const readStatusImg = document.createElement("img");
       readStatusImg.src = "./src/tick1.png";
       readStatusImg.setAttribute("id", "card-read-status-img");
@@ -93,20 +96,20 @@ class Book {
     }
 
     const EditBtn = document.createElement("button");
-    EditBtn.setAttribute("id", "edit-btn"); // Corrected method to set attribute
+    EditBtn.setAttribute("id", "edit-btn");
     const EditImg = document.createElement("img");
     EditImg.src = "./src/edit.png";
     EditImg.setAttribute("id", "edit-img");
     EditBtn.appendChild(EditImg);
 
     const DelBtn = document.createElement("button");
-    DelBtn.setAttribute("id", "delete-btn"); // Corrected method to set attribute
+    DelBtn.setAttribute("id", "delete-btn");
     const DelImg = document.createElement("img");
-    DelImg.src = "./src/cross.png"; // Corrected image reference for delete button
+    DelImg.src = "./src/cross.png";
     DelImg.setAttribute("id", "delete-img");
     DelBtn.appendChild(DelImg);
 
-    toolContainer.append(EditBtn, DelBtn); // Correctly append both buttons
+    toolContainer.append(EditBtn, DelBtn);
 
     card.append(cardInfo, toolContainer);
 
@@ -117,3 +120,33 @@ class Book {
     mainContainer.appendChild(card);
   }
 }
+
+// Save book to localStorage
+function saveBookToLocalStorage(book) {
+  let books = JSON.parse(localStorage.getItem("books")) || [];
+  books.push(book);
+  localStorage.setItem("books", JSON.stringify(books));
+}
+
+// Load books from localStorage
+function loadBooksFromLocalStorage() {
+  let books = JSON.parse(localStorage.getItem("books")) || [];
+  books.forEach((bookData) => {
+    const book = new Book(
+      bookData.title,
+      bookData.author,
+      bookData.pages,
+      bookData.read
+    );
+    book.addToHtml();
+    if (book.read) {
+      TotalBooksRead.textContent = parseInt(TotalBooksRead.textContent) + 1;
+    }
+    TotalBooks.textContent = parseInt(TotalBooks.textContent) + 1;
+    TotalPages.textContent =
+      parseInt(TotalPages.textContent) + parseInt(book.pages);
+  });
+}
+
+// Load books on page load
+window.addEventListener("load", loadBooksFromLocalStorage);
