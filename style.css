@@ -108,27 +108,27 @@ img {
   background-color: #a7a7a773;
 }
 
-#delete-img {
+.delete-img {
   height: auto;
   width: 2.3rem;
 }
-#delete-btn {
+.delete-btn {
   padding: 6px;
 }
 #edit-img {
   height: auto;
   width: 3rem;
 }
-#delete-btn:hover {
+.delete-btn:hover {
   background-color: rgba(168, 167, 167, 0.208);
   cursor: pointer;
 }
-#edit-btn:hover {
+.edit-btn:hover {
   background-color: rgba(168, 167, 167, 0.208);
   cursor: pointer;
 }
-#edit-btn,
-#delete-btn {
+.edit-btn,
+.delete-btn {
   border: none;
   background-color: transparent;
   cursor: pointer;

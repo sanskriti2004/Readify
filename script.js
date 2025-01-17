@@ -1,3 +1,4 @@
+// Select all necessary static elements
 const formCloseButton = document.querySelector("#form-close-btn");
 const formDiv = document.querySelector(".book-info");
 const addBookButton = document.querySelector("#add-btn");
@@ -8,33 +9,61 @@ const TotalBooks = document.querySelector("#total-books");
 const TotalBooksRead = document.querySelector("#total-books-read");
 const form = document.querySelector("#book-form");
 
+let editMode = false; // Flag to track whether the form is in edit mode
+let bookToEdit = null; // Reference to the book being edited
+
+// Close form
 formCloseButton.addEventListener("click", () => {
   formDiv.style.display = "none";
   mainContainer.classList.remove("blurred");
   form.reset();
+  editMode = false; // Reset edit mode
 });
+
+// Show form to add a new book
 addBookButton.addEventListener("click", () => {
   formDiv.style.display = "flex";
   mainContainer.classList.add("blurred");
+  form.reset(); // Clear form when adding a new book
+  editMode = false; // Ensure we're not editing
 });
 
+// Submit form
 formSubmitButton.addEventListener("click", () => {
   const bookTitle = document.getElementById("book-name").value.trim();
   const bookAuthor = document.getElementById("author-name").value.trim();
   const bookPages = document.getElementById("pages").value.trim();
   const bookRead = document.getElementById("read-status").checked;
+
   if (bookTitle === "" || bookAuthor === "" || bookPages === "") {
     alert("Please fill out all the fields");
     return;
   }
-  const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
-  newBook.addToHtml();
+
+  if (editMode) {
+    // Edit existing book
+    bookToEdit.querySelector(".card-book-title").textContent = bookTitle;
+    bookToEdit.querySelector(".card-author").textContent = "By " + bookAuthor;
+    bookToEdit.querySelector(".card-pages").textContent = bookPages + " pages";
+
+    // Update localStorage
+    updateBookInLocalStorage(bookToEdit.dataset.id, {
+      title: bookTitle,
+      author: bookAuthor,
+      pages: bookPages,
+      read: bookRead,
+    });
+  } else {
+    // Add new book
+    const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
+    newBook.addToHtml();
+    saveBookToLocalStorage(newBook);
+  }
+
   formDiv.style.display = "none";
   mainContainer.classList.remove("blurred");
   form.reset();
-
-  // Save the book to localStorage
-  saveBookToLocalStorage(newBook);
+  editMode = false; // Reset edit mode after submission
 });
 
 class Book {
@@ -43,25 +72,13 @@ class Book {
     this.author = author;
     this.pages = pages;
     this.read = read;
+    this.id = Math.random().toString(36).substr(2, 9); // Generate a unique ID for the book
   }
 
   addToHtml() {
-    // Capitalize the first letter of each word for title and author
-    this.title = this.title
-      .toLowerCase()
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-
-    this.author = this.author
-      .toLowerCase()
-      .split(" ")
-      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-      .join(" ");
-
-    // Create card element and append book details
     const card = document.createElement("div");
     card.classList.add("card");
+    card.dataset.id = this.id; // Attach the unique ID to the card
 
     const cardInfo = document.createElement("div");
     cardInfo.classList.add("card-info");
@@ -80,7 +97,6 @@ class Book {
 
     cardInfo.append(cardBookTitle, cardAuthor, cardPages);
 
-    // Tool container with edit and delete buttons
     const toolContainer = document.createElement("div");
     toolContainer.classList.add("edit-tool-container");
 
@@ -96,17 +112,17 @@ class Book {
     }
 
     const EditBtn = document.createElement("button");
-    EditBtn.setAttribute("id", "edit-btn");
+    EditBtn.classList.add("edit-btn"); // Use class instead of ID for multiple buttons
     const EditImg = document.createElement("img");
     EditImg.src = "./src/edit.png";
-    EditImg.setAttribute("id", "edit-img");
+    EditImg.classList.add("edit-img");
     EditBtn.appendChild(EditImg);
 
     const DelBtn = document.createElement("button");
-    DelBtn.setAttribute("id", "delete-btn");
+    DelBtn.classList.add("delete-btn"); // Use class instead of ID for multiple buttons
     const DelImg = document.createElement("img");
     DelImg.src = "./src/cross.png";
-    DelImg.setAttribute("id", "delete-img");
+    DelImg.classList.add("delete-img");
     DelBtn.appendChild(DelImg);
 
     toolContainer.append(EditBtn, DelBtn);
@@ -121,10 +137,71 @@ class Book {
   }
 }
 
+// Event delegation for Edit and Delete buttons
+mainContainer.addEventListener("click", (event) => {
+  const card = event.target.closest(".card");
+  if (!card) return; // Exit if no card is found
+
+  // Handle Edit Button
+  if (event.target.classList.contains("edit-img")) {
+    const title = card.querySelector(".card-book-title").textContent;
+    const author = card
+      .querySelector(".card-author")
+      .textContent.replace("By ", "");
+    const pages = card
+      .querySelector(".card-pages")
+      .textContent.replace(" pages", "");
+
+    document.getElementById("book-name").value = title;
+    document.getElementById("author-name").value = author;
+    document.getElementById("pages").value = pages;
+
+    formDiv.style.display = "flex";
+    mainContainer.classList.add("blurred");
+
+    editMode = true; // Set edit mode
+    bookToEdit = card; // Save reference to the book being edited
+  }
+
+  // Handle Delete Button
+  if (event.target.classList.contains("delete-img")) {
+    // Update totals
+    const pages = parseInt(card.querySelector(".card-pages").textContent);
+    TotalPages.textContent = parseInt(TotalPages.textContent) - pages;
+    TotalBooks.textContent = parseInt(TotalBooks.textContent) - 1;
+
+    if (card.querySelector("#card-read-status")) {
+      TotalBooksRead.textContent = parseInt(TotalBooksRead.textContent) - 1;
+    }
+
+    // Remove from DOM
+    card.remove();
+
+    // Remove from localStorage
+    removeBookFromLocalStorage(card.dataset.id);
+  }
+});
+
 // Save book to localStorage
 function saveBookToLocalStorage(book) {
   let books = JSON.parse(localStorage.getItem("books")) || [];
   books.push(book);
+  localStorage.setItem("books", JSON.stringify(books));
+}
+
+// Update book in localStorage
+function updateBookInLocalStorage(id, updatedData) {
+  let books = JSON.parse(localStorage.getItem("books")) || [];
+  books = books.map((book) =>
+    book.id === id ? { ...book, ...updatedData } : book
+  );
+  localStorage.setItem("books", JSON.stringify(books));
+}
+
+// Remove book from localStorage
+function removeBookFromLocalStorage(id) {
+  let books = JSON.parse(localStorage.getItem("books")) || [];
+  books = books.filter((book) => book.id !== id);
   localStorage.setItem("books", JSON.stringify(books));
 }
 
@@ -138,13 +215,8 @@ function loadBooksFromLocalStorage() {
       bookData.pages,
       bookData.read
     );
+    book.id = bookData.id; // Ensure ID is retained
     book.addToHtml();
-    if (book.read) {
-      TotalBooksRead.textContent = parseInt(TotalBooksRead.textContent) + 1;
-    }
-    TotalBooks.textContent = parseInt(TotalBooks.textContent) + 1;
-    TotalPages.textContent =
-      parseInt(TotalPages.textContent) + parseInt(book.pages);
   });
 }
 
