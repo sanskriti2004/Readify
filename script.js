@@ -152,9 +152,14 @@ mainContainer.addEventListener("click", (event) => {
       .querySelector(".card-pages")
       .textContent.replace(" pages", "");
 
+    // Determine the read status
+    const isRead = !!card.querySelector("#card-read-status");
+
+    // Populate form fields
     document.getElementById("book-name").value = title;
     document.getElementById("author-name").value = author;
     document.getElementById("pages").value = pages;
+    document.getElementById("read-status").checked = isRead; // Update checkbox
 
     formDiv.style.display = "flex";
     mainContainer.classList.add("blurred");
@@ -180,6 +185,69 @@ mainContainer.addEventListener("click", (event) => {
     // Remove from localStorage
     removeBookFromLocalStorage(card.dataset.id);
   }
+});
+
+// Submit form
+formSubmitButton.addEventListener("click", () => {
+  // Retrieve form field values
+  const bookTitle = document.getElementById("book-name")?.value?.trim();
+  const bookAuthor = document.getElementById("author-name")?.value?.trim();
+  const bookPages = document.getElementById("pages")?.value?.trim();
+  const bookRead = document.getElementById("read-status")?.checked;
+
+  // Debug: Log field values to verify correctness
+  console.log("Book Title:", bookTitle);
+  console.log("Book Author:", bookAuthor);
+  console.log("Book Pages:", bookPages);
+
+  // Validate inputs explicitly
+  if (!bookTitle || !bookAuthor || !bookPages) {
+    alert("Please fill out all the fields.");
+    return;
+  }
+
+  if (editMode) {
+    // Edit existing book
+    const prevReadStatus = !!bookToEdit.querySelector("#card-read-status");
+
+    bookToEdit.querySelector(".card-book-title").textContent = bookTitle;
+    bookToEdit.querySelector(".card-author").textContent = "By " + bookAuthor;
+    bookToEdit.querySelector(".card-pages").textContent = bookPages + " pages";
+
+    // Update read status in UI
+    if (bookRead && !prevReadStatus) {
+      const readStatusBtn = document.createElement("button");
+      readStatusBtn.setAttribute("id", "card-read-status");
+      const readStatusImg = document.createElement("img");
+      readStatusImg.src = "./src/tick1.png";
+      readStatusImg.setAttribute("id", "card-read-status-img");
+      readStatusBtn.appendChild(readStatusImg);
+      bookToEdit.querySelector(".edit-tool-container").prepend(readStatusBtn);
+      TotalBooksRead.textContent = parseInt(TotalBooksRead.textContent) + 1;
+    } else if (!bookRead && prevReadStatus) {
+      bookToEdit.querySelector("#card-read-status").remove();
+      TotalBooksRead.textContent = parseInt(TotalBooksRead.textContent) - 1;
+    }
+
+    // Update localStorage
+    updateBookInLocalStorage(bookToEdit.dataset.id, {
+      title: bookTitle,
+      author: bookAuthor,
+      pages: bookPages,
+      read: bookRead,
+    });
+  } else {
+    // Add new book
+    const newBook = new Book(bookTitle, bookAuthor, bookPages, bookRead);
+    newBook.addToHtml();
+    saveBookToLocalStorage(newBook);
+  }
+
+  // Close the form after successful submission
+  formDiv.style.display = "none";
+  mainContainer.classList.remove("blurred");
+  form.reset();
+  editMode = false; // Reset edit mode after submission
 });
 
 // Save book to localStorage
